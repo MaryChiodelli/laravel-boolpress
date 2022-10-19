@@ -3,8 +3,10 @@
 @section('content')
 
 <div class="container">
-    <h1>Posts list:</h1>
-    <a class="btn btn-primary" href="{{ route('admin.posts.create') }}" role="button">Add new post</a>
+    <div class="d-flex align-items-center justify-content-between">
+        <h1>Posts list</h1>
+        <a class="btn btn-primary" href="{{ route('admin.posts.create') }}" role="button">Add new post</a>
+    </div>
 </div>
 
 <div class="container-fluid">
@@ -15,7 +17,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
                 <th scope="col">Created at</th>
-                <th colspan="3"></th>
+                <th colspan="3">Edit actions</th>
             </tr>
         </thead>
         <tbody>
