@@ -32,16 +32,16 @@
         <div class="form-group">
             <label for="category">Categorie</label>
             <select class="form-control @error('category_id') is-invalid @enderror" id="category" name="category_id">
-              <option>-- seleziona una categoria --</option>
-              @foreach ($categories as $category)
-              <option value="{{ $category->id }}">{{ $category->name }}</option>
-              @endforeach
+                <option>-- seleziona una categoria --</option>
+                @foreach ($categories as $category)
+                <option @if (old('category_id') === $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </select>
 
             @error('category_id')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
-          </div>
+        </div>
 
         <input class="btn btn-primary" type="submit" value="Create">
 

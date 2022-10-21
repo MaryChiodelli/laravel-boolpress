@@ -6,6 +6,9 @@
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->slug }}</p>
     <p>{{ $post->content }}</p>
+    @if ($post->category)
+    <div>Categoria: {{ $post->category->name }}</div>
+    @endif
 </div>
 
 <div class="container">

@@ -41,7 +41,8 @@ class PostController extends Controller
     {
         $params = $request->validate([
             'title' => ['required', 'max:255', 'min:5'],
-            'content' => ['required']
+            'content' => ['required'],
+            'category_id' => ['nullable']
         ]);
         $params['slug'] = str_replace(' ', '-', $params['title']);
         $post = Post::create($params);
@@ -67,7 +68,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -81,7 +83,8 @@ class PostController extends Controller
     {
         $params = $request->validate([
             'title' => ['required', 'max:255', 'min:5'],
-            'content' => ['required']
+            'content' => ['required'],
+            'category_id' => ['nullable']
         ]);
         $params['slug'] = str_replace(' ', '-', $params['title']);
         $post->update($params);
