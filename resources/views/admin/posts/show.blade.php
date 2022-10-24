@@ -5,10 +5,26 @@
 <div class="container">
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->slug }}</p>
+
+    <div>Categoria</div>
+    <ul>
+        @if ($post->category)
+            <li>{{ $post->category->name }}</li>
+        @else
+            <li>nessuna categoria</li>
+        @endif
+    </ul>
+
+    <div>Tags</div>
+    <ul>
+        @forelse ($post->tags as $tag)
+            <li>{{ $tag->name }}</li>
+        @empty
+            <li>nessun tag</li>
+        @endforelse
+    </ul>
+
     <p>{{ $post->content }}</p>
-    @if ($post->category)
-    <div>Categoria: {{ $post->category->name }}</div>
-    @endif
 </div>
 
 <div class="container">

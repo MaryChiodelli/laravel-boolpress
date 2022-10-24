@@ -8,15 +8,15 @@
         <a class="btn btn-primary" href="{{ route('admin.posts.create') }}" role="button">Add new post</a>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Slug</th>
                 <th scope="col">Category</th>
-                <th scope="col">Created at</th>
+                <th scope="col">Tags</th>
+                <th scope="col">Updated At</th>
                 <th colspan="3">Edit actions</th>
             </tr>
         </thead>
@@ -25,9 +25,15 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->slug }}</td>
-                <td>{{ $post->category ? $post->category->name : 'nessuna categoria' }}</td>
-                <td>{{ $post->created_at }}</td>
+                <td>{{ $post->category ? $post->category->name : '--' }}</td>
+                <td>
+                    @forelse ($post->tags as $tag)
+                        <div>{{ $tag->name }}</div>
+                    @empty
+                        <div>--</div>
+                    @endforelse
+                </td>
+                <td>{{ $post->updated_at }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}" role="button">view</a>
                 </td>
