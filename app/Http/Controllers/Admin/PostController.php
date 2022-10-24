@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag;
 use App\Category;
 use App\Post;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -27,8 +29,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $categories = Category::orderBy('name', 'asc')->get();
+        $tags = Tag::orderBy('name', 'asc')->get();
+
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -42,10 +46,18 @@ class PostController extends Controller
         $params = $request->validate([
             'title' => ['required', 'max:255', 'min:5'],
             'content' => ['required'],
-            'category_id' => ['nullable']
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'tags' => ['nullable', 'exists:tags,id']
         ]);
-        $params['slug'] = str_replace(' ', '-', $params['title']);
+
+        $params['slug'] = Str::slug($params['title']);
         $post = Post::create($params);
+
+        if (array_key_exists('tags', $params)) {
+            $tags = $params['tags'];
+            $post->tags()->sync($tags);
+        }
+        
         return redirect()->route('admin.posts.show', compact('post'));
     }
 
@@ -68,8 +80,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $categories = Category::orderBy('name', 'asc')->get();
+        $tags = Tag::orderBy('name', 'asc')->get();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -84,10 +98,18 @@ class PostController extends Controller
         $params = $request->validate([
             'title' => ['required', 'max:255', 'min:5'],
             'content' => ['required'],
-            'category_id' => ['nullable']
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'tags' => ['nullable', 'exists:tags,id']
         ]);
+
         $params['slug'] = str_replace(' ', '-', $params['title']);
         $post->update($params);
+
+        if (array_key_exists('tags', $params)) {
+            $tags = $params['tags'];
+            $post->tags()->sync($tags);
+        }
+        
         return redirect()->route('admin.posts.show', compact('post'));
     }
 

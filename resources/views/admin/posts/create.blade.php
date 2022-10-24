@@ -12,7 +12,7 @@
         @csrf
 
         <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">Titolo</label>
             <input type="text" name="title" value="{{ old('title') }}" id="title" class="form-control @error('title') is-invalid @enderror">
 
             @error('title')
@@ -21,7 +21,27 @@
         </div>
 
         <div class="form-group">
-            <label for="content">Content</label>
+            <label for="category">Categoria</label>
+            <select class="form-control" id="category" name="category_id">
+                <option value="">-- nessuna --</option>
+                @foreach ($categories as $category)
+                <option @if (old('category_id') == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="d-block">Tags</label>
+            @foreach ($tags as $tag)
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="{{ $tag->slug }}" name="tags[]" value="{{ $tag->id }}">
+                <label class="form-check-label" for="{{ $tag->slug }}">{{ $tag->name }}</label>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="form-group">
+            <label for="content">Contenuto</label>
             <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" rows="3">{{ old('content') }}</textarea>
 
             @error('content')
@@ -29,19 +49,15 @@
             @enderror
         </div>
 
-        <div class="form-group">
-            <label for="category">Categorie</label>
-            <select class="form-control @error('category_id') is-invalid @enderror" id="category" name="category_id">
-                <option>-- seleziona una categoria --</option>
-                @foreach ($categories as $category)
-                <option @if (old('category_id') === $category->id) selected @endif value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-
-            @error('category_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <input class="btn btn-primary" type="submit" value="Create">
 
