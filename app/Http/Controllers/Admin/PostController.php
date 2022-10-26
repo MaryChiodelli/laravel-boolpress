@@ -6,6 +6,7 @@ use App\Tag;
 use App\Category;
 use App\Post;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -47,17 +48,22 @@ class PostController extends Controller
             'title' => ['required', 'max:255', 'min:5'],
             'content' => ['required'],
             'category_id' => ['nullable', 'exists:categories,id'],
-            'tags' => ['exists:tags,id']
+            'tags' => ['exists:tags,id'],
+            'cover' => ['nullable', 'image', 'max:2048']
         ]);
-
+        
         $params['slug'] = Str::slug($params['title']);
+        
+        $img_path = Storage::put('uploads', $params['cover']);
+        $params['cover'] = $img_path;
+        
         $post = Post::create($params);
 
         if (array_key_exists('tags', $params)) {
             $tags = $params['tags'];
             $post->tags()->sync($tags);
         }
-        
+
         return redirect()->route('admin.posts.show', compact('post'));
     }
 

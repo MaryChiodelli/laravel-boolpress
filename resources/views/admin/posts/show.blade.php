@@ -5,6 +5,7 @@
 <div class="container">
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->slug }}</p>
+    <img src="{{ asset('storage/' . $post->cover ) }}" alt="">
 
     <div>Categoria</div>
     <ul>
