@@ -22,7 +22,11 @@
 
         <div class="form-group">
             <label for="cover">Cover</label>
-            <input id="cover" name="cover" type="file" class="form-control-file">
+            <input id="cover" name="cover" type="file" class="form-control-file @error('cover') is-invalid @enderror">
+
+            @error('cover')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="form-group">

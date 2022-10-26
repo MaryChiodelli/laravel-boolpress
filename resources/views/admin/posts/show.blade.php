@@ -5,7 +5,10 @@
 <div class="container">
     <h1>{{ $post->title }}</h1>
     <p>{{ $post->slug }}</p>
-    <img src="{{ asset('storage/' . $post->cover ) }}" alt="">
+
+    @if ($post->cover)
+        <img class="rounded" width="400" src="{{ asset('storage/' . $post->cover ) }}" alt="">
+    @endif
 
     <div>Categoria</div>
     <ul>
