@@ -54,7 +54,7 @@ class PostController extends Controller
             'cover' => ['nullable', 'image', 'max:2048']
         ]);
         
-        $params['slug'] = Str::slug($params['title']);
+        $params['slug'] = Post::getUniqueSlugFrom($params['title']);
         
         if (array_key_exists('cover', $params)) {
             $cover_path = Storage::put('uploads', $params['cover']);
@@ -115,7 +115,7 @@ class PostController extends Controller
             'cover' => ['nullable', 'image', 'max:2048']
         ]);
 
-        $params['slug'] = str_replace(' ', '-', $params['title']);
+        $params['slug'] = Post::getUniqueSlugFrom($params['title']);
         
         if (array_key_exists('cover', $params)) {
             $cover_path = Storage::put('uploads', $params['cover']);
@@ -129,7 +129,7 @@ class PostController extends Controller
             $post->tags()->sync($tags);
         }
         
-        return redirect()->route('admin.posts.show', compact('post'));
+        return redirect()->route('admin.posts.show', $post);
     }
 
     /**
