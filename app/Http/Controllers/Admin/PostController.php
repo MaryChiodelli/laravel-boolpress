@@ -6,7 +6,7 @@ use App\Tag;
 use App\Category;
 use App\Post;
 use App\Mail\SendPostCreatedMail;
-use Illuminate\Support\Str;
+use App\Mail\SendPostUpdatedMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -128,6 +128,8 @@ class PostController extends Controller
             $tags = $params['tags'];
             $post->tags()->sync($tags);
         }
+
+        Mail::to($request->user())->send(new SendPostUpdatedMail($post));
         
         return redirect()->route('admin.posts.show', $post);
     }
