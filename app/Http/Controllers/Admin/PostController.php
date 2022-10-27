@@ -68,8 +68,8 @@ class PostController extends Controller
             $post->tags()->sync($tags);
         }
 
-        Mail::to($request->user())->send(new SendPostCreatedMail());
-        
+        Mail::to($request->user())->send(new SendPostCreatedMail($post));
+
         return redirect()->route('admin.posts.show', $post);
     }
 

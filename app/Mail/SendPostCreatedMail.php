@@ -11,14 +11,16 @@ class SendPostCreatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $post;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($post)
     {
-        //
+        $this->post = $post;
     }
 
     /**
@@ -28,6 +30,6 @@ class SendPostCreatedMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.postCreated');
+        return $this->markdown('mails.postCreated');
     }
 }
