@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,5 +47,10 @@ class Post extends Model
         return $this->updated_at->format('d/m/Y');
     }
 
-    protected $appends = ['update_date'];
+    public function getCoverPathAttribute()
+    {
+        return $this->cover ? Storage::url($this->cover) : null;
+    }
+
+    protected $appends = ['update_date', 'cover_path'];
 }

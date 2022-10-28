@@ -1,5 +1,8 @@
 <template>
     <li class="bg-slate-50 rounded-md p-4">
+        <img v-if="post.cover" class="w-full aspect-video object-cover rounded" :src="post.cover_path" alt="">
+        <div class="w-full aspect-video bg-slate-400 rounded flex justify-center items-center" v-else>immagine non disponibile</div>
+
         <h3 class="text-2xl">{{ post.title }}</h3>
         <div>aggiornato il: {{ post.update_date }}</div>
 

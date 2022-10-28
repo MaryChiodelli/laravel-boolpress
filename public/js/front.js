@@ -1973,7 +1973,15 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("li", {
     staticClass: "bg-slate-50 rounded-md p-4"
-  }, [_c("h3", {
+  }, [_vm.post.cover ? _c("img", {
+    staticClass: "w-full aspect-video object-cover rounded",
+    attrs: {
+      src: _vm.post.cover_path,
+      alt: ""
+    }
+  }) : _c("div", {
+    staticClass: "w-full aspect-video bg-slate-400 rounded flex justify-center items-center"
+  }, [_vm._v("immagine non disponibile")]), _vm._v(" "), _c("h3", {
     staticClass: "text-2xl"
   }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("div", [_vm._v("aggiornato il: " + _vm._s(_vm.post.update_date))]), _vm._v(" "), _vm.post.tags ? _c("ul", {
     staticClass: "flex"
