@@ -1908,7 +1908,27 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      title: 'Articoli',
+      posts: []
+    };
+  },
+  methods: {
+    fetchPosts: function fetchPosts() {
+      var _this = this;
+      axios.get('/api/posts').then(function (res) {
+        console.log(res);
+        var posts = res.data.posts;
+        _this.posts = posts;
+      });
+    }
+  },
+  created: function created() {
+    this.fetchPosts();
+  }
+});
 
 /***/ }),
 
@@ -1926,7 +1946,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("ciao")]);
+  return _c("div", [_c("h1", [_vm._v(_vm._s(_vm.title))]), _vm._v(" "), _c("ul", _vm._l(_vm.posts, function (post) {
+    return _c("li", {
+      key: post.id
+    }, [_c("h3", [_vm._v(_vm._s(post.title))]), _vm._v(" "), _c("div", [_vm._v("updated at: " + _vm._s(post.updated_at))])]);
+  }), 0)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
