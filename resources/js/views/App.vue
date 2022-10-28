@@ -1,18 +1,24 @@
 <template>
-    <div>
-        <h1>{{ title }}</h1>
+    <section>
+        <div class="container py-[20px]">
+            <h1>{{ title }}</h1>
+        </div>
 
-        <ul>
-            <li v-for="post in posts" :key="post.id">
-                <h3>{{ post.title }}</h3>
-                <div>updated at: {{ post.updated_at }}</div>
-            </li>
-        </ul>
-    </div>
+        <div class="container">
+            <ul class="grid grid-cols-4 gap-4">
+                <PostCard v-for="post in posts" :key="post.id" :post="post" />
+            </ul>
+        </div>
+    </section>
 </template>
 
 <script>
+import PostCard from '../components/PostCard.vue';
+
 export default {
+    components: {
+        PostCard
+    },
     data() {
         return {
             title: 'Articoli',

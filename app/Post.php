@@ -40,4 +40,11 @@ class Post extends Model
 
         return $slug;
     }
+
+    public function getUpdateDateAttribute()
+    {
+        return $this->updated_at->format('d/m/Y');
+    }
+
+    protected $appends = ['update_date'];
 }
