@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <router-view></router-view>
-    </div>
+    <div>chi siamo</div>
 </template>
 
 <script>
 export default {
-
+    
 }
 </script>
 
