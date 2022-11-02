@@ -1,5 +1,5 @@
 <template>
-    <li class="bg-slate-50 rounded-md p-4">
+    <article class="bg-slate-50 rounded-md p-4">
         <img v-if="post.cover" class="w-full aspect-video object-cover rounded" :src="post.cover_path" alt="">
         <div class="w-full aspect-video bg-slate-400 rounded flex justify-center items-center" v-else>immagine non disponibile</div>
 
@@ -13,7 +13,7 @@
         <span class="text-sm px-3 py-1 bg-green-200 rounded" v-if="post.category">
             {{ post.category.name }}
         </span>
-    </li>
+    </article>
 </template>
 
 <script>

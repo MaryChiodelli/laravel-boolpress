@@ -5,9 +5,11 @@
         </div>
 
         <div class="container">
-            <ul class="grid grid-cols-4 gap-4">
-                <PostCard v-for="post in posts" :key="post.id" :post="post" />
-            </ul>
+            <div class="grid grid-cols-4 gap-4">
+                <router-link :to="{ name: 'posts.show', params: { slug: post.slug } }" v-for="post in posts" :key="post.id">
+                    <PostCard :post="post" />
+                </router-link>
+            </div>
         </div>
     </section>
 </template>
@@ -28,7 +30,6 @@ export default {
     methods: {
         fetchPosts() {
             axios.get('/api/posts').then((res) => {
-                console.log(res);
                 const { posts } = res.data;
                 this.posts = posts;
             });
