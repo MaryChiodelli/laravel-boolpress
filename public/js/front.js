@@ -2089,8 +2089,10 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("header", [_c("div", {
-    staticClass: "container flex flex-wrap justify-between"
-  }, [_c("div", [_vm._v("Boolpress")]), _vm._v(" "), _c("ul", {
+    staticClass: "container px-4 py-2 flex flex-wrap justify-between items-baseline"
+  }, [_c("div", {
+    staticClass: "text-lg"
+  }, [_vm._v("Boolpress")]), _vm._v(" "), _c("ul", {
     staticClass: "flex"
   }, _vm._l(_vm.navLinks, function (link, index) {
     return _c("li", {
@@ -2168,7 +2170,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("chi siamo")]);
+  return _c("div", {
+    staticClass: "container"
+  }, [_vm._v("chi siamo")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2190,7 +2194,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("contatti")]);
+  return _c("div", {
+    staticClass: "container"
+  }, [_vm._v("contatti")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2212,7 +2218,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._v("home")]);
+  return _c("div", {
+    staticClass: "container"
+  }, [_vm._v("home")]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2235,11 +2243,11 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("section", [_c("div", {
-    staticClass: "container py-[20px]"
+    staticClass: "container"
   }, [_c("h1", [_vm._v(_vm._s(_vm.title))])]), _vm._v(" "), _c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "grid grid-cols-4 gap-4"
+    staticClass: "grid grid-cols-1 md:md:grid-cols-2 lg:md:grid-cols-4 gap-4"
   }, _vm._l(_vm.posts, function (post) {
     return _c("router-link", {
       key: post.id,
@@ -2252,6 +2260,7 @@ var render = function render() {
         }
       }
     }, [_c("PostCard", {
+      staticClass: "h-full",
       attrs: {
         post: post
       }

@@ -20,7 +20,8 @@
         tailwind.config = {
             theme: {
                 container: {
-                    center: true
+                    center: true,
+                    padding: '1rem'
                 }
             }
         }

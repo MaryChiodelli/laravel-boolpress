@@ -1,7 +1,7 @@
 <template>
     <header>
-        <div class="container flex flex-wrap justify-between">
-            <div>Boolpress</div>
+        <div class="container px-4 py-2 flex flex-wrap justify-between items-baseline">
+            <div class="text-lg">Boolpress</div>
             <ul class="flex">
                 <li v-for="(link, index) in navLinks" :key="index" class="px-2">
                     <router-link :to="{ name: link.name }">{{ link.text }}</router-link>
