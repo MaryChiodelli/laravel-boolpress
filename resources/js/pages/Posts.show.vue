@@ -1,11 +1,26 @@
 <template>
-    <div v-if="post">
+    <article v-if="post">
         <div class="container">
-            <h1>{{ post.title }}</h1>
-            <p>{{ post.content }}</p>
-            <div v-if="post.category">Categoria: {{ post.category.name }}</div>
+            <img v-if="post.cover_path" :src="post.cover_path" alt="">
         </div>
-    </div>
+
+        <div class="container text-center">
+            <div v-if="post.category">{{ post.category.name }}</div>
+            <h1>{{ post.title }}</h1>
+            <div>{{ post.update_date }}</div>
+        </div>
+
+        <div class="container">
+            <p v-if="post.content">{{ post.content }}</p>
+        </div>
+
+        <div v-if="post.tags.length > 0" class="container">
+            <div>Tags</div>
+            <ul class="flex">
+                <li v-for="tag in post.tags" :key="tag.slug" class="mr-2">{{ tag.name }}</li>
+            </ul>
+        </div>
+    </article>
 </template>
 
 <script>

@@ -44,7 +44,7 @@ class Post extends Model
 
     public function getUpdateDateAttribute()
     {
-        return $this->updated_at->format('d/m/Y');
+        return $this->updated_at->isoFormat('MMMM d, Y');
     }
 
     public function getCoverPathAttribute()

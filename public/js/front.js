@@ -2348,9 +2348,27 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.post ? _c("div", [_c("div", {
+  return _vm.post ? _c("article", [_c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _vm.post.category ? _c("div", [_vm._v("Categoria: " + _vm._s(_vm.post.category.name))]) : _vm._e()])]) : _vm._e();
+  }, [_vm.post.cover_path ? _c("img", {
+    attrs: {
+      src: _vm.post.cover_path,
+      alt: ""
+    }
+  }) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "container text-center"
+  }, [_vm.post.category ? _c("div", [_vm._v(_vm._s(_vm.post.category.name))]) : _vm._e(), _vm._v(" "), _c("h1", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.post.update_date))])]), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, [_vm.post.content ? _c("p", [_vm._v(_vm._s(_vm.post.content))]) : _vm._e()]), _vm._v(" "), _vm.post.tags.length > 0 ? _c("div", {
+    staticClass: "container"
+  }, [_c("div", [_vm._v("Tags")]), _vm._v(" "), _c("ul", {
+    staticClass: "flex"
+  }, _vm._l(_vm.post.tags, function (tag) {
+    return _c("li", {
+      key: tag.slug,
+      staticClass: "mr-2"
+    }, [_vm._v(_vm._s(tag.name))]);
+  }), 0)]) : _vm._e()]) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
