@@ -1,22 +1,28 @@
 <template>
-    <div class="container">
-        <h1>Pagina di dettaglio</h1>
-        <div>{{ slug }}</div>
+    <div v-if="post">
+        <div class="container">
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.content }}</p>
+            <div v-if="post.category">Categoria: {{ post.category.name }}</div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    props: ['slug'],
     data() {
         return {
-            slug: null
+            post: null
         }
     },
     methods: {
         fetchPost() {
-            const { slug } = this.$route.params;
-            this.slug = slug;
-            console.log(slug);
+            axios.get(`/api/posts/${this.slug}`).then((res) => {
+                const { post } = res.data;
+                this.post = post;
+                console.log(post);
+            });
         }
     },
     created() {

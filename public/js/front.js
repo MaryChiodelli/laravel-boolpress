@@ -2036,16 +2036,20 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['slug'],
   data: function data() {
     return {
-      slug: null
+      post: null
     };
   },
   methods: {
     fetchPost: function fetchPost() {
-      var slug = this.$route.params.slug;
-      this.slug = slug;
-      console.log(slug);
+      var _this = this;
+      axios.get("/api/posts/".concat(this.slug)).then(function (res) {
+        var post = res.data.post;
+        _this.post = post;
+        console.log(post);
+      });
     }
   },
   created: function created() {
@@ -2287,9 +2291,9 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _vm.post ? _c("div", [_c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("Pagina di dettaglio")]), _vm._v(" "), _c("div", [_vm._v(_vm._s(_vm.slug))])]);
+  }, [_c("h1", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.content))]), _vm._v(" "), _vm.post.category ? _c("div", [_vm._v("Categoria: " + _vm._s(_vm.post.category.name))]) : _vm._e()])]) : _vm._e();
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -18491,7 +18495,8 @@ var routes = [{
 }, {
   path: '/blog/:slug',
   name: 'posts.show',
-  component: _pages_Posts_show_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _pages_Posts_show_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  props: true
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
