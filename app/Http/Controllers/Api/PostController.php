@@ -41,6 +41,12 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->with('category', 'tags')->first();
 
+        if (!$post) {
+            return response()->json([
+                'success' => false
+            ], 404);
+        }
+
         return response()->json([
             'post' => $post,
             'success' => true

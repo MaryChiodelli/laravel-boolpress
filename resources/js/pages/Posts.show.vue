@@ -22,6 +22,11 @@ export default {
                 const { post } = res.data;
                 this.post = post;
                 console.log(post);
+            }).catch((err) => {
+                const { status } = err.response;
+                if (status === 404) {
+                    this.$router.replace({ name: '404' });
+                }
             });
         }
     },
